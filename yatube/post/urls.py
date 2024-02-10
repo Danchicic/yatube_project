@@ -1,12 +1,9 @@
+from django.urls import path
 
+from . import views
 
-
-
-
-
-def main():
-
-    pass
-
-if __name__ == '__main__':
-    main()
+app_name = 'post'
+urlpatterns = [
+    path('', views.index, name="main"),
+    path('group/<slug:group_name>/', views.group_posts, name='group')
+]

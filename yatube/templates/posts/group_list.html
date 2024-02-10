@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+<!DOCTYPE html> <!-- Используется html 5 версии -->
+<html lang="ru"> <!-- Язык сайта - русский -->
+<head>
+    {% block title %}
+        <title>{{ title }}</title>
+    {% endblock title %}
+</head>
+<body>
+<header>
+    {% block content %}
+        <!-- Использованы классы бустрапа для создания типовой навигации с логотипом -->
+        <!-- В дальнейшем тут будет создано полноценное меню -->
+        <nav class="navbar navbar-light" style="background-color: lightskyblue">
+            <div class="container">
+                <a class="navbar-brand" href="{% url 'post:main' %}">
+                    <img src="../../static/img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                    <!-- тег span используется для добавления нужных стилей отдельным участкам текста -->
+                    <span style="color:red">Ya</span>tube</a>
+            </div>
+        </nav>
+
+        </header>
+        <main>
+            <!-- класс py-5 создает отступы сверху и снизу блока -->
+            <div class="container py-5">
+                <h1>{{ title }}</h1>
+                <p>
+                    {{ description }}
+                </p>
+                {% for post in posts %}
+                    <article>
+                        <ul>
+                            <li>Автор: {{ post.author.get_full_name }}</li>
+                            <li>Дата публикации: {{ post.pub_date|date:"d F Y" }}</li>
+                        </ul>
+                        <p>{{ post.text }}</p>
+
+
+                    </article>
+                    {% if not forloop.last %}
+                        <hr>
+                    {% endif %}
+                {% endfor %}
+
+            </div>
+
+        </main>
+        <footer class="page-footer font-small blue border-top">
+            <div class="footer-copyright text-center py-3">© 2020 Copyright
+                <p><span style="color:red">Ya</span>tube</p>
+            </div>
+        </footer>
+        </body>
+    {% endblock content %}
