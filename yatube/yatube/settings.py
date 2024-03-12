@@ -29,6 +29,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'core.apps.CoreConfig',
+    'about.apps.AboutConfig',
+    'library.apps.LibraryConfig',
+    'users.apps.UsersConfig',
     'post.apps.PostConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -61,6 +65,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'context_processors.year.year',
+                'post.context_processors.groups.get_groups',
+                'core.templatetags.user_filters.add_class',
             ],
         },
     },
@@ -99,7 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
 
@@ -118,3 +125,9 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL = 'users:login'
+LOGIN_REDIRECT_URL = 'post:main'
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
+LOGOUT_REDIRECT_URL = "post:main"

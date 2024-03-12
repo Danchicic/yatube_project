@@ -10,4 +10,54 @@
 <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/fav/favicon-32x32.png' %}">
 <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/fav/favicon-16x16.png' %}">
 <meta name="msapplication-TileColor" content="#000">
+<meta name="msapplication-TileColor" content="#da532c">
 <meta name="theme-color" content="#ffffff">
+<header>
+    <nav class="navbar navbar-light" style="background-color: lightskyblue">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'post:main' %}">
+                <img src="{% static 'img/logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
+                <span style="color:red">Ya</span>tube
+            </a>
+            {# Добавлено в спринте #}
+
+            {% comment %}
+      Меню - список пунктов со стандартными классами Bootsrap.
+      Класс nav-pills нужен для выделения активных пунктов
+      {% endcomment %}
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about:author' %}">Об авторе</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url "about:tech" %}">Технологии</a>
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "post:post_create" %}">Новая запись</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link link-light" href="{% url 'users:change_password' %}">Изменить пароль</a>
+                    </li>
+                    <li class="nav-item">
+                        <form method="post" action="{% url 'users:logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="nav-link link-light">Выйти</button>
+                        </form>
+                        {#                        <a  href="{% url "users:logout" %}">Выйти</a>#}
+                    </li>
+                    <li>
+                        Пользователь: {{ user.username }}
+                    <li>
+                        {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link link-light" href="{% url "users:login" %}">Войти</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link link-light" href="{% url "users:signup" %}">Регистрация</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+</header>

@@ -16,8 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+
 # yatube/url.py
 urlpatterns = [
+    path('auth/', include('users.urls', namespace='users')),
     path('', include('post.urls', namespace='post')),
     path('admin/', admin.site.urls),
+    path('auth/', include('django.contrib.auth.urls')),
+    path('library/', include('library.urls', namespace='library')),
+    path('about/', include('about.urls', namespace='about')),
+
 ]

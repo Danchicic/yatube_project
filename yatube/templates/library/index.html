@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!-- Based on https://getbootstrap.com/docs/4.4/examples/pricing/ -->
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Уголок рокнрольщика</title>
+
+    <!-- Bootstrap core CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+</head>
+    <body>
+        <h1>Предложение обмена</h1>
+        <p class="lead">
+            Предложите мне свой диск на обмен.
+        </p>
+        {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                <div class="alert alert-danger">
+                    {{ error|escape }}
+                </div>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {{ error|escape }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        <form method="post" action="/">
+            {% csrf_token %}
+
+            {% for field in form %}
+            <div class="form-group row my-3 p-3">
+                <label for="{{ field.id_for_label }}">
+                    {{ field.label }}
+                    {% if field.field.required %}
+                        <span class="required text-danger">*</span>
+                    {% endif %}
+                </label>
+                {{ field }}
+                {% if field.help_text %}
+                    <small id="{{ field.id_for_label }}-help" class="form-text text-muted">
+                    {{ field.help_text|safe }}
+                    </small>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <div class="col-md-6 offset-md-4">
+                <button type="submit" class="btn btn-primary">
+                    Предложить
+                </button>
+            </div>
+        </form>
+   </body>
+</html>

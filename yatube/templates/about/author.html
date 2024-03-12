@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обо мне</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #ff9900;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+{% block content %}
+    <div class="container">
+        <h1>Привет, я [Твое имя]</h1>
+        <p>Здесь могло бы быть краткое описание о себе, вашем опыте и увлечениях.</p>
+        <h2>Мои навыки:</h2>
+        <ul>
+            <li>Навык 1</li>
+            <li>Навык 2</li>
+            <li>Навык 3</li>
+        </ul>
+        <h2>Мой опыт:</h2>
+        <p>Здесь можно описать ваш опыт работы или образование.</p>
+        <h2>Связаться со мной:</h2>
+        <p>Email: example@example.com<br>Телефон: 123-456-7890</p>
+    </div>
+    <script>
+        // Дополнительный JS код, если необходимо
+    </script>
+    </body>
+{% endblock content %}
+</html>

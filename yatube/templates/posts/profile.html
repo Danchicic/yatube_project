@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!-- Подключены иконки, стили и заполенены мета теги -->
+    {% block title %}
+        <title>Профайл пользователя {{ name }}</title>
+    {% endblock %}
+</head>
+<body>
+{% block  content %}
+
+    <main>
+        <div class="container py-5">
+            <h1>Все посты пользователя {{ name }} </h1>
+            <h3>Всего постов: {{ posts_count }} </h3>
+            <article>
+                {% for post in page_obj %}
+                    <ul>
+                        <li>
+                            Автор: {{ post.author }}
+                            <p>
+                                <a href="{% url 'post:profile' post.author.username %}">все посты пользователя</a>
+                            </p>
+                        </li>
+                        <li>
+                            Дата публикации: {{ post.pub_date }}
+                        </li>
+                    </ul>
+                    <p>
+                        {{ post.text }}
+                    </p>
+                    <p>
+                        {% if post.group.address %}
+                            <a href="{% url 'post:post_detail' post.id %}">Подробная информация</a>
+                        {% endif %}
+                    </p>
+                    {% if post.group.address %}
+                        <a href="{% url 'post:group' post.group.address %}">Перейти к сообществу</a>
+                    {% endif %}
+                    {% if not forloop.last %}
+                        <hr>
+                    {% endif %}
+                {% endfor %}
+
+            </article>
+
+            <!-- Остальные посты. после последнего нет черты -->
+            <!-- Здесь подключён паджинатор -->
+        </div>
+    </main>
+{% endblock %}
+
+</body>
+</html>
